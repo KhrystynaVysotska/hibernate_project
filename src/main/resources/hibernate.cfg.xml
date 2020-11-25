@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-configuration SYSTEM
+"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration> 
+ <session-factory> 
+  <!-- Database connection settings -->
+   <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property> 
+   <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/vysotska?useUnicode=true&amp;serverTimezone=UTC</property> 
+   <property name="hibernate.connection.username">root</property> 
+   <property name="hibernate.connection.password">lab_password</property> 
+
+  <!-- SQL dialect -->
+   <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property> 
+  
+  <!-- Drop and re-create the database schema on startup -->
+   <property name="hbm2ddl.auto">update</property> 
+ 
+   </session-factory> 
+ </hibernate-configuration>
