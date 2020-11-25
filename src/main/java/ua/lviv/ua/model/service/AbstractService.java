@@ -28,4 +28,17 @@ public abstract class AbstractService<T> implements Service<T> {
 		return getDao().getByField(fieldName, value);
 	}
 
+	@Override
+	public T update(T entity) {
+		return getDao().update(entity);
+	}
+
+	@Override
+	public boolean deleteById(Integer id) {
+		if (getById(id) != null) {
+			return getDao().deleteById(id);
+		} else {
+			return false;
+		}
+	}
 }

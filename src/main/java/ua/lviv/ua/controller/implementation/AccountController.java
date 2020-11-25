@@ -32,7 +32,7 @@ public class AccountController extends AbstractController<AccountEntity> {
 		AccountEntity account = generateEntity();
 		if (account != null) {
 			accountService.create(account);
-			System.out.println("Your have just created:\n" + "\n" + account.getId() + "\n");
+			System.out.println("Your have just created:\n" + account.toString());
 		}
 	}
 

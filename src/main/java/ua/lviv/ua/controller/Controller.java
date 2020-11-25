@@ -3,7 +3,11 @@ package ua.lviv.ua.controller;
 public interface Controller<T> {
 	void getAll();
 
-	void getById();
+	T getById();
 
 	void create();
+
+	void update();
+
+	void deleteById();
 }

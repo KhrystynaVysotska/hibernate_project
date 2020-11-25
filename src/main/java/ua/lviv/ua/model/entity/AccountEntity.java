@@ -83,7 +83,7 @@ public class AccountEntity {
 		this.pinCodeByPinCodeId = pinCodeByPinCodeId;
 	}
 
-	@ManyToOne
+	@ManyToOne(cascade = { CascadeType.REFRESH, CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH })
 	@JoinColumn(name = "account_owner_id", referencedColumnName = "id", nullable = false)
 	public AccountOwnerEntity getAccountOwnerByAccountOwnerId() {
 		return accountOwnerByAccountOwnerId;
@@ -93,7 +93,7 @@ public class AccountEntity {
 		this.accountOwnerByAccountOwnerId = accountOwnerByAccountOwnerId;
 	}
 
-	@ManyToOne
+	@ManyToOne(cascade = { CascadeType.REFRESH, CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH })
 	@JoinColumn(name = "bank_identification_code", referencedColumnName = "identification_code", nullable = false)
 	public BankEntity getBankByBankIdentificationCode() {
 		return bankByBankIdentificationCode;
@@ -103,7 +103,7 @@ public class AccountEntity {
 		this.bankByBankIdentificationCode = bankByBankIdentificationCode;
 	}
 
-	@ManyToOne
+	@ManyToOne(cascade = { CascadeType.REFRESH, CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH })
 	@JoinColumn(name = "currency_id", referencedColumnName = "id")
 	public CurrencyEntity getCurrencyByCurrencyId() {
 		return currencyByCurrencyId;
@@ -113,7 +113,7 @@ public class AccountEntity {
 		this.currencyByCurrencyId = currencyByCurrencyId;
 	}
 
-	@ManyToOne
+	@ManyToOne(cascade = { CascadeType.REFRESH, CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH })
 	@JoinColumn(name = "account_type_id", referencedColumnName = "id")
 	public AccountTypeEntity getAccountTypeByAccountTypeId() {
 		return accountTypeByAccountTypeId;
@@ -121,5 +121,14 @@ public class AccountEntity {
 
 	public void setAccountTypeByAccountTypeId(AccountTypeEntity accountTypeByAccountTypeId) {
 		this.accountTypeByAccountTypeId = accountTypeByAccountTypeId;
+	}
+
+	@Override
+	public String toString() {
+		return "AccountEntity [id=" + id + ", currentAccountNumber=" + currentAccountNumber + ", amount=" + amount
+				+ ", pinCodeByPinCodeId=" + pinCodeByPinCodeId + ", accountOwnerByAccountOwnerId="
+				+ accountOwnerByAccountOwnerId + ", bankByBankIdentificationCode=" + bankByBankIdentificationCode
+				+ ", currencyByCurrencyId=" + currencyByCurrencyId + ", accountTypeByAccountTypeId="
+				+ accountTypeByAccountTypeId + "]";
 	}
 }

@@ -10,4 +10,8 @@ public interface Service<T> {
 	T create(T entity);
 
 	T getByField(String fieldName, Object value);
+
+	T update(T entity);
+
+	boolean deleteById(Integer id);
 }

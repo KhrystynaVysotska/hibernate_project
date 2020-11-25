@@ -8,8 +8,16 @@ import java.util.Scanner;
 import ua.lviv.ua.controller.implementation.AccountController;
 import ua.lviv.ua.controller.implementation.AccountOwnerController;
 import ua.lviv.ua.controller.implementation.AccountTypeController;
+import ua.lviv.ua.controller.implementation.AdressController;
+import ua.lviv.ua.controller.implementation.BankCardController;
 import ua.lviv.ua.controller.implementation.BankController;
+import ua.lviv.ua.controller.implementation.BuildingController;
+import ua.lviv.ua.controller.implementation.CardTypeController;
+import ua.lviv.ua.controller.implementation.CityController;
 import ua.lviv.ua.controller.implementation.CurrencyController;
+import ua.lviv.ua.controller.implementation.PinCodeController;
+import ua.lviv.ua.controller.implementation.StreetController;
+import ua.lviv.ua.controller.implementation.TransferController;
 
 public class ConsoleMenu {
 	private static final String EXIT = "Q";
@@ -97,23 +105,23 @@ public class ConsoleMenu {
 		controllers.put("1", new BankController());
 		controllers.put("2", new AccountController());
 		controllers.put("3", new AccountOwnerController());
-//		controllers.put("4", new BankCardController());
-//		controllers.put("5", new TransferController());
+		controllers.put("4", new BankCardController());
+		controllers.put("5", new TransferController());
 		controllers.put("6", new AccountTypeController());
-//		controllers.put("7", new CardTypeController());
-//		controllers.put("8", new AddressController());
-//		controllers.put("9", new CityController());
-//		controllers.put("A", new StreetController());
-//		controllers.put("B", new BuildingController());
+		controllers.put("7", new CardTypeController());
+		controllers.put("8", new AdressController());
+		controllers.put("9", new CityController());
+		controllers.put("A", new StreetController());
+		controllers.put("B", new BuildingController());
 		controllers.put("C", new CurrencyController());
-//		controllers.put("D", new PinCodeController());
+		controllers.put("D", new PinCodeController());
 	}
 
 	private void generateMenuMethods() {
 		methodsMenu.put("1", controller -> controller.create());
 		methodsMenu.put("2", controller -> controller.getById());
-//		methodsMenu.put("3", controller -> controller.deleteById());
-//		methodsMenu.put("4", controller -> controller.update());
+		methodsMenu.put("3", controller -> controller.deleteById());
+		methodsMenu.put("4", controller -> controller.update());
 		methodsMenu.put("5", controller -> controller.getAll());
 	}
 
