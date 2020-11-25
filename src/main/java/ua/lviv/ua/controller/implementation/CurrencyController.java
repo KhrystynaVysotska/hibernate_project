@@ -18,8 +18,8 @@ public class CurrencyController extends AbstractController<CurrencyEntity> {
 
 	public CurrencyEntity getByName() {
 		System.out.println("Enter currency: ");
-		String currency = input.nextLine();
-		return currencyService.getByName(currency);
+		String currency = input.next();
+		return currencyService.getByField("name", currency);
 	}
 
 	@Override

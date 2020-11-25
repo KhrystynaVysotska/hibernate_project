@@ -18,8 +18,8 @@ public class AccountTypeController extends AbstractController<AccountTypeEntity>
 
 	public AccountTypeEntity getByType() {
 		System.out.println("Enter account type: ");
-		String accountType = input.nextLine();
-		return accountTypeService.getByType(accountType);
+		String accountType = input.next();
+		return accountTypeService.getByField("type", accountType);
 	}
 
 	@Override

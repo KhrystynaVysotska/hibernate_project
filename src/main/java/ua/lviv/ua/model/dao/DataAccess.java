@@ -8,4 +8,6 @@ public interface DataAccess<T> {
 	T getById(Integer id);
 
 	T create(T entity);
+
+	T getByField(String fieldName, Object value);
 }

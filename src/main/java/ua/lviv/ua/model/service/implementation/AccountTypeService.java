@@ -13,9 +13,4 @@ public class AccountTypeService extends AbstractService<AccountTypeEntity> {
 	protected DataAccess<AccountTypeEntity> getDao() {
 		return accountTypeDataAccess;
 	}
-
-	public AccountTypeEntity getByType(String accountType) {
-		return accountTypeDataAccess.getByType(accountType);
-	}
-
 }

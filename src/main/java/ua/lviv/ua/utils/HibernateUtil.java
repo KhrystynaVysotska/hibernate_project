@@ -43,9 +43,9 @@ public class HibernateUtil {
 				configuration.addAnnotatedClass(TransferEntity.class);
 				builder.applySettings(configuration.getProperties());
 				sessionFactory = configuration.buildSessionFactory(builder.build());
-			} catch (Throwable th) {
-				System.err.println("Initial SessionFactory creation failed" + th);
-				throw new ExceptionInInitializerError(th);
+			} catch (Exception exeption) {
+				System.err.println("Initial SessionFactory creation failed" + exeption.getMessage());
+				throw new ExceptionInInitializerError(exeption);
 			}
 		}
 		return sessionFactory;
@@ -55,7 +55,7 @@ public class HibernateUtil {
 		Session session = null;
 		try {
 			session = getSessionFactory().openSession();
-		} catch (HibernateException exception) {
+		} catch (HibernateException | ExceptionInInitializerError exception) {
 			System.err.println("Couldn't open session " + exception.getMessage());
 		}
 		return session;

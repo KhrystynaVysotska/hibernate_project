@@ -2,6 +2,7 @@ package ua.lviv.ua.model.dao;
 
 import java.util.List;
 
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -43,6 +44,7 @@ public abstract class AbstractDataAccess<T> implements DataAccess<T> {
 		return entity;
 	}
 
+	@Override
 	public T create(T entity) {
 		Session session = null;
 		Transaction transaction = null;
@@ -53,6 +55,21 @@ public abstract class AbstractDataAccess<T> implements DataAccess<T> {
 			transaction.commit();
 		} catch (Exception ex) {
 			transaction.rollback();
+		} finally {
+			new HibernateUtil().closeSession(session);
+		}
+		return entity;
+	}
+
+	@Override
+	public T getByField(String fieldName, Object value) {
+		Session session = null;
+		T entity = null;
+		try {
+			session = new HibernateUtil().getSession();
+			entity = session.byNaturalId(type).using(fieldName, value).load();
+		} catch (HibernateException exception) {
+			System.err.println("Couldn't map class " + exception.getMessage());
 		} finally {
 			new HibernateUtil().closeSession(session);
 		}

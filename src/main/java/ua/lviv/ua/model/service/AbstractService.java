@@ -22,4 +22,10 @@ public abstract class AbstractService<T> implements Service<T> {
 	public T create(T entity) {
 		return getDao().create(entity);
 	}
+
+	@Override
+	public T getByField(String fieldName, Object value) {
+		return getDao().getByField(fieldName, value);
+	}
+
 }

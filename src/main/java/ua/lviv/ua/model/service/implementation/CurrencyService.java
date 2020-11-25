@@ -12,9 +12,4 @@ public class CurrencyService extends AbstractService<CurrencyEntity> {
 	protected DataAccess<CurrencyEntity> getDao() {
 		return currencyDataAccess;
 	}
-
-	public CurrencyEntity getByName(String currency) {
-		return currencyDataAccess.getByName(currency);
-	}
-
 }

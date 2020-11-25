@@ -8,6 +8,10 @@ import org.hibernate.Transaction;
 
 import ua.lviv.ua.controller.AbstractController;
 import ua.lviv.ua.model.entity.AccountEntity;
+import ua.lviv.ua.model.entity.AccountOwnerEntity;
+import ua.lviv.ua.model.entity.AccountTypeEntity;
+import ua.lviv.ua.model.entity.BankEntity;
+import ua.lviv.ua.model.entity.CurrencyEntity;
 import ua.lviv.ua.model.entity.PinCodeEntity;
 import ua.lviv.ua.model.service.Service;
 import ua.lviv.ua.model.service.implementation.AccountService;
@@ -26,8 +30,10 @@ public class AccountController extends AbstractController<AccountEntity> {
 	@Override
 	public void create() {
 		AccountEntity account = generateEntity();
-		accountService.create(account);
-		System.out.println("Your have just created:\n" + "\n" + account + "\n");
+		if (account != null) {
+			accountService.create(account);
+			System.out.println("Your have just created:\n" + "\n" + account.getId() + "\n");
+		}
 	}
 
 	public AccountEntity generateEntity() {
@@ -37,11 +43,11 @@ public class AccountController extends AbstractController<AccountEntity> {
 		Transaction transaction = null;
 		try {
 			System.out.println("Create account number: ");
-			String currentAccountNumber = input.nextLine();
+			String currentAccountNumber = input.next();
 			account.setCurrentAccountNumber(currentAccountNumber);
 
 			System.out.println("Create pin code: ");
-			String pin = input.nextLine();
+			String pin = input.next();
 			pinCode.setPin(pin);
 			account.setPinCodeByPinCodeId(pinCode);
 
@@ -53,25 +59,44 @@ public class AccountController extends AbstractController<AccountEntity> {
 				session = new HibernateUtil().getSession();
 				transaction = session.beginTransaction();
 
-				account.setAccountOwnerByAccountOwnerId(new AccountOwnerController().findByEmail());
+				AccountOwnerEntity accountOwner = new AccountOwnerController().findByEmail();
+				if (accountOwner == null) {
+					throw new Exception("[ERROR] account owner undefined! Check your email and try again");
+				}
+				account.setAccountOwnerByAccountOwnerId(accountOwner);
 
 				System.out.println("Enter bank identification code (up to 9 digits): ");
 				int bankIdentificationCode = input.nextInt();
-				account.setBankByBankIdentificationCode(new BankService().getById(bankIdentificationCode));
+				BankEntity bank = new BankService().getById(bankIdentificationCode);
+				if (bank == null) {
+					throw new Exception("[ERROR] bank undefined! Check your input and try again");
+				}
+				account.setBankByBankIdentificationCode(bank);
 
-				account.setCurrencyByCurrencyId(new CurrencyController().getByName());
+				CurrencyEntity currency = new CurrencyController().getByName();
+				if (currency == null) {
+					throw new Exception("[ERROR] currency undefined! Check your input and try again");
+				}
+				account.setCurrencyByCurrencyId(currency);
 
-				account.setAccountTypeByAccountTypeId(new AccountTypeController().getByType());
+				AccountTypeEntity accountType = new AccountTypeController().getByType();
+				if (accountType == null) {
+					throw new Exception("[ERROR] account type undefined! Check your input and try again");
+				}
+				account.setAccountTypeByAccountTypeId(accountType);
 
 				transaction.commit();
-			} catch (Exception exeption) {
+			} catch (Exception exception) {
+				System.out.println(exception.getMessage());
 				transaction.rollback();
+				return null;
 			} finally {
 				new HibernateUtil().closeSession(session);
 			}
 		} catch (InputMismatchException e) {
 			System.out.println("Your input is not valid! Please, follow constraints!\n");
 			input.next();
+			return null;
 		}
 		return account;
 	}

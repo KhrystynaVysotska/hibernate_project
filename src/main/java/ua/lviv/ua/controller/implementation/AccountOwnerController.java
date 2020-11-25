@@ -23,11 +23,11 @@ public class AccountOwnerController extends AbstractController<AccountOwnerEntit
 
 	public AccountOwnerEntity findByEmail() {
 		System.out.println("Enter owner email: ");
-		String accountOwnerEmail = input.nextLine();
+		String accountOwnerEmail = input.next();
 		while (!accountOwnerEmail.matches("^[\\w-\\.]+@[\\w]+[\\.][\\w-]{2,4}$")) {
 			System.out.println("Wrong format! Please, input correct email");
-			accountOwnerEmail = input.nextLine();
+			accountOwnerEmail = input.next();
 		}
-		return accountOwnerService.findByEmail(accountOwnerEmail);
+		return accountOwnerService.getByField("email", accountOwnerEmail);
 	}
 }
