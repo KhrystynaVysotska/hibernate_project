@@ -41,7 +41,7 @@ public class AccountController extends AbstractController<AccountEntity> {
 
 	public AccountEntity generateEntity() {
 		AccountEntity account = new AccountEntity();
-		PinCodeEntity pinCode = new PinCodeEntity();
+		PinCodeEntity pinCode = null;
 		Session session = null;
 		Transaction transaction = null;
 		try {
@@ -56,8 +56,8 @@ public class AccountController extends AbstractController<AccountEntity> {
 			try {
 				session = new HibernateUtil().getSession();
 				transaction = session.beginTransaction();
-				AccountOwnerEntity accountOwner = new AccountOwnerEntity();
-				BankEntity bank = new BankEntity();
+				AccountOwnerEntity accountOwner = null;
+				BankEntity bank = null;
 
 				pinCode = new PinCodeController().generateEntity();
 				account.setPinCodeByPinCodeId(pinCode);
@@ -96,7 +96,9 @@ public class AccountController extends AbstractController<AccountEntity> {
 				transaction.commit();
 			} catch (Exception exception) {
 				System.out.println(exception.getMessage());
-				transaction.rollback();
+				if (transaction != null) {
+					transaction.rollback();
+				}
 				return null;
 			} finally {
 				new HibernateUtil().closeSession(session);
