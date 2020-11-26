@@ -44,7 +44,9 @@ public abstract class AbstractDataAccess<T> implements DataAccess<T> {
 			session.save(entity);
 			transaction.commit();
 		} catch (Exception ex) {
-			transaction.rollback();
+			if (transaction != null) {
+				transaction.rollback();
+			}
 		} finally {
 			new HibernateUtil().closeSession(session);
 		}
@@ -88,7 +90,9 @@ public abstract class AbstractDataAccess<T> implements DataAccess<T> {
 			session.delete(entity);
 			transaction.commit();
 		} catch (Exception ex) {
-			transaction.rollback();
+			if (transaction != null) {
+				transaction.rollback();
+			}
 			return false;
 		} finally {
 			new HibernateUtil().closeSession(session);
