@@ -94,11 +94,11 @@ public class AccountOwnerEntity {
 	@Basic
 	@Column(name = "birth_date")
 	public Date getBirthDate() {
-		return birthDate;
+		return (Date) birthDate.clone();
 	}
 
 	public void setBirthDate(Date birthDate) {
-		this.birthDate = birthDate;
+		this.birthDate = (Date) birthDate.clone();
 	}
 
 	@Override

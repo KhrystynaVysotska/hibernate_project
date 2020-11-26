@@ -36,11 +36,11 @@ public class BankCardEntity {
 	@Basic
 	@Column(name = "date_of_expire")
 	public Date getDateOfExpire() {
-		return dateOfExpire;
+		return (Date) dateOfExpire.clone();
 	}
 
 	public void setDateOfExpire(Date dateOfExpire) {
-		this.dateOfExpire = dateOfExpire;
+		this.dateOfExpire = (Date) dateOfExpire.clone();
 	}
 
 	@Override
