@@ -129,4 +129,12 @@ public class TransferEntity {
 	public void setCurrencyByCurrencyId(CurrencyEntity currencyByCurrencyId) {
 		this.currencyByCurrencyId = currencyByCurrencyId;
 	}
+
+	@Override
+	public String toString() {
+		return "TransferEntity [id=" + id + ", amount=" + amount + ", date=" + date + ", time=" + time
+				+ ", purposeOfPayment=" + purposeOfPayment + ", accountBySenderAccountId=" + accountBySenderAccountId
+				+ ", accountByRecipientAccountId=" + accountByRecipientAccountId + ", currencyByCurrencyId="
+				+ currencyByCurrencyId + "]";
+	}
 }

@@ -23,7 +23,7 @@ public class CurrencyEntity {
 
 	@Basic
 	@Column(name = "name")
-	@NaturalId
+	@NaturalId(mutable = true)
 	public String getName() {
 		return name;
 	}
@@ -54,5 +54,10 @@ public class CurrencyEntity {
 		int result = id != null ? id.hashCode() : 0;
 		result = 31 * result + (name != null ? name.hashCode() : 0);
 		return result;
+	}
+
+	@Override
+	public String toString() {
+		return "CurrencyEntity [id=" + id + ", name=" + name + "]";
 	}
 }

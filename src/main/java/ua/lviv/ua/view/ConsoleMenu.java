@@ -51,7 +51,11 @@ public class ConsoleMenu {
 				choice = input.nextLine().trim().toUpperCase();
 				if (!choice.equals(EXIT)) {
 					if (choice.length() == 2) {
-						methodsMenu.get(choice.substring(1)).print(controllers.get(choice.substring(0, 1)));
+						try {
+							methodsMenu.get(choice.substring(1)).print(controllers.get(choice.substring(0, 1)));
+						} catch (NullPointerException exeption) {
+							System.out.println("Incorrect option! Try again\n");
+						}
 					} else {
 						System.out.println("Incorrect option! Try again\n");
 					}

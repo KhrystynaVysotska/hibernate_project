@@ -89,4 +89,10 @@ public class BankCardEntity {
 	public void setCardTypeByCardTypeId(CardTypeEntity cardTypeByCardTypeId) {
 		this.cardTypeByCardTypeId = cardTypeByCardTypeId;
 	}
+
+	@Override
+	public String toString() {
+		return "BankCardEntity [id=" + id + ", cvc2=" + cvc2 + ", dateOfExpire=" + dateOfExpire
+				+ ", accountByAccountId=" + accountByAccountId + ", cardTypeByCardTypeId=" + cardTypeByCardTypeId + "]";
+	}
 }

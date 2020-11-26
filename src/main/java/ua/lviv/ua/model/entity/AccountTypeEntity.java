@@ -23,7 +23,7 @@ public class AccountTypeEntity {
 
 	@Basic
 	@Column(name = "type")
-	@NaturalId
+	@NaturalId(mutable = true)
 	public String getType() {
 		return type;
 	}
@@ -54,5 +54,10 @@ public class AccountTypeEntity {
 		int result = id != null ? id.hashCode() : 0;
 		result = 31 * result + (type != null ? type.hashCode() : 0);
 		return result;
+	}
+
+	@Override
+	public String toString() {
+		return "AccountTypeEntity [id=" + id + ", type=" + type + "]";
 	}
 }

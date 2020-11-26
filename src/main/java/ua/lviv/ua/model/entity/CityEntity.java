@@ -24,7 +24,7 @@ public class CityEntity {
 	}
 
 	@Basic
-	@NaturalId
+	@NaturalId(mutable = true)
 	@Column(name = "name")
 	public String getName() {
 		return name;

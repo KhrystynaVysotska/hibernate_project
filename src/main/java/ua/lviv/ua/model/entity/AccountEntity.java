@@ -2,6 +2,8 @@ package ua.lviv.ua.model.entity;
 
 import javax.persistence.*;
 
+import org.hibernate.annotations.NaturalId;
+
 @Entity
 @Table(name = "account", schema = "vysotska")
 public class AccountEntity {
@@ -26,6 +28,7 @@ public class AccountEntity {
 	}
 
 	@Basic
+	@NaturalId(mutable = true)
 	@Column(name = "current_account_number")
 	public String getCurrentAccountNumber() {
 		return currentAccountNumber;

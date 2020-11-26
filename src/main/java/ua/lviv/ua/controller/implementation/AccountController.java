@@ -108,4 +108,10 @@ public class AccountController extends AbstractController<AccountEntity> {
 		}
 		return account;
 	}
+
+	public AccountEntity getByAccountNumber(String message) {
+		System.out.println(message);
+		String currentAccountNumber = input.next();
+		return accountService.getByField("currentAccountNumber", currentAccountNumber);
+	}
 }
