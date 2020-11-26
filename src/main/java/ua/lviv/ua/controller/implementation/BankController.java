@@ -70,5 +70,4 @@ public class BankController extends AbstractController<BankEntity> {
 		}
 		return bank;
 	}
-
 }

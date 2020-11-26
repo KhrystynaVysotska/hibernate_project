@@ -2,6 +2,8 @@ package ua.lviv.ua.model.entity;
 
 import javax.persistence.*;
 
+import org.hibernate.annotations.NaturalId;
+
 @Entity
 @Table(name = "city", schema = "vysotska", catalog = "")
 public class CityEntity {
@@ -22,6 +24,7 @@ public class CityEntity {
 	}
 
 	@Basic
+	@NaturalId
 	@Column(name = "name")
 	public String getName() {
 		return name;
@@ -79,5 +82,10 @@ public class CityEntity {
 		result = 31 * result + (zipCode != null ? zipCode.hashCode() : 0);
 		result = 31 * result + (phoneCode != null ? phoneCode.hashCode() : 0);
 		return result;
+	}
+
+	@Override
+	public String toString() {
+		return "CityEntity [id=" + id + ", name=" + name + ", zipCode=" + zipCode + ", phoneCode=" + phoneCode + "]";
 	}
 }

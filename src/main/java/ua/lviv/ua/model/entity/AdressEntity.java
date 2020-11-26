@@ -41,7 +41,7 @@ public class AdressEntity {
 		return id != null ? id.hashCode() : 0;
 	}
 
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "city_id", referencedColumnName = "id", nullable = false)
 	public CityEntity getCityByCityId() {
 		return cityByCityId;
@@ -51,7 +51,7 @@ public class AdressEntity {
 		this.cityByCityId = cityByCityId;
 	}
 
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "street_id", referencedColumnName = "id")
 	public StreetEntity getStreetByStreetId() {
 		return streetByStreetId;
@@ -61,7 +61,7 @@ public class AdressEntity {
 		this.streetByStreetId = streetByStreetId;
 	}
 
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "building_id", referencedColumnName = "id")
 	public BuildingEntity getBuildingByBuildingId() {
 		return buildingByBuildingId;
@@ -69,5 +69,11 @@ public class AdressEntity {
 
 	public void setBuildingByBuildingId(BuildingEntity buildingByBuildingId) {
 		this.buildingByBuildingId = buildingByBuildingId;
+	}
+
+	@Override
+	public String toString() {
+		return "AdressEntity [id=" + id + ", cityByCityId=" + cityByCityId + ", streetByStreetId=" + streetByStreetId
+				+ ", buildingByBuildingId=" + buildingByBuildingId + "]";
 	}
 }

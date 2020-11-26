@@ -2,6 +2,8 @@ package ua.lviv.ua.model.entity;
 
 import javax.persistence.*;
 
+import org.hibernate.annotations.NaturalId;
+
 @Entity
 @Table(name = "street", schema = "vysotska", catalog = "")
 public class StreetEntity {
@@ -20,6 +22,7 @@ public class StreetEntity {
 	}
 
 	@Basic
+	@NaturalId
 	@Column(name = "name")
 	public String getName() {
 		return name;
@@ -51,5 +54,10 @@ public class StreetEntity {
 		int result = id != null ? id.hashCode() : 0;
 		result = 31 * result + (name != null ? name.hashCode() : 0);
 		return result;
+	}
+
+	@Override
+	public String toString() {
+		return "StreetEntity [id=" + id + ", name=" + name + "]";
 	}
 }

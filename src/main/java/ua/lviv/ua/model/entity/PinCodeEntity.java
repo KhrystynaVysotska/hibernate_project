@@ -52,4 +52,9 @@ public class PinCodeEntity {
 		result = 31 * result + (pin != null ? pin.hashCode() : 0);
 		return result;
 	}
+
+	@Override
+	public String toString() {
+		return "PinCodeEntity [id=" + id + ", pin=" + pin + "]";
+	}
 }

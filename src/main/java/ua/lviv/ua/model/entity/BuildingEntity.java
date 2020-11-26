@@ -66,4 +66,9 @@ public class BuildingEntity {
 		result = 31 * result + (flatNumber != null ? flatNumber.hashCode() : 0);
 		return result;
 	}
+
+	@Override
+	public String toString() {
+		return "BuildingEntity [id=" + id + ", houseNumber=" + houseNumber + ", flatNumber=" + flatNumber + "]";
+	}
 }

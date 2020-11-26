@@ -15,7 +15,6 @@ import ua.lviv.ua.model.entity.CurrencyEntity;
 import ua.lviv.ua.model.entity.PinCodeEntity;
 import ua.lviv.ua.model.service.Service;
 import ua.lviv.ua.model.service.implementation.AccountService;
-import ua.lviv.ua.model.service.implementation.BankService;
 import ua.lviv.ua.utils.HibernateUtil;
 
 public class AccountController extends AbstractController<AccountEntity> {
@@ -32,7 +31,11 @@ public class AccountController extends AbstractController<AccountEntity> {
 		AccountEntity account = generateEntity();
 		if (account != null) {
 			accountService.create(account);
-			System.out.println("Your have just created:\n" + account.toString());
+			if (account.getId() != null) {
+				System.out.println("Your have just created:\n" + account.toString());
+			} else {
+				System.out.println("[WARN] Something went wrong...");
+			}
 		}
 	}
 
@@ -58,16 +61,23 @@ public class AccountController extends AbstractController<AccountEntity> {
 			try {
 				session = new HibernateUtil().getSession();
 				transaction = session.beginTransaction();
+				AccountOwnerEntity accountOwner = new AccountOwnerEntity();
+				BankEntity bank = new BankEntity();
 
-				AccountOwnerEntity accountOwner = new AccountOwnerController().findByEmail();
+				System.out.println(
+						"Do you want to create new account owner or sign in with existing one? Create : Existing");
+				String response = input.next().trim().toLowerCase();
+				accountOwner = response.equals("create") ? new AccountOwnerController().generateEntity()
+						: new AccountOwnerController().findByEmail();
 				if (accountOwner == null) {
 					throw new Exception("[ERROR] account owner undefined! Check your email and try again");
 				}
 				account.setAccountOwnerByAccountOwnerId(accountOwner);
 
-				System.out.println("Enter bank identification code (up to 9 digits): ");
-				int bankIdentificationCode = input.nextInt();
-				BankEntity bank = new BankService().getById(bankIdentificationCode);
+				System.out.println("Do you want to create new bank or use existing one? Create : Existing");
+				response = input.next().trim().toLowerCase();
+				bank = response.equals("create") ? new BankController().generateEntity()
+						: new BankController().getById();
 				if (bank == null) {
 					throw new Exception("[ERROR] bank undefined! Check your input and try again");
 				}

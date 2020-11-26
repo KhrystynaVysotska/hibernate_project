@@ -145,7 +145,7 @@ public class AccountOwnerEntity {
 		return result;
 	}
 
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "adress_id", referencedColumnName = "id")
 	public AdressEntity getAdressByAdressId() {
 		return adressByAdressId;
@@ -153,5 +153,13 @@ public class AccountOwnerEntity {
 
 	public void setAdressByAdressId(AdressEntity adressByAdressId) {
 		this.adressByAdressId = adressByAdressId;
+	}
+
+	@Override
+	public String toString() {
+		return "AccountOwnerEntity [id=" + id + ", personalIdentificationNumber=" + personalIdentificationNumber
+				+ ", name=" + name + ", surname=" + surname + ", patronym=" + patronym + ", mobileNumber="
+				+ mobileNumber + ", email=" + email + ", birthDate=" + birthDate + ", adressByAdressId="
+				+ adressByAdressId + "]";
 	}
 }
