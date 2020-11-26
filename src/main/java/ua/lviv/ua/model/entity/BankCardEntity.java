@@ -70,7 +70,7 @@ public class BankCardEntity {
 		return result;
 	}
 
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "account_id", referencedColumnName = "id", nullable = false)
 	public AccountEntity getAccountByAccountId() {
 		return accountByAccountId;
@@ -80,7 +80,7 @@ public class BankCardEntity {
 		this.accountByAccountId = accountByAccountId;
 	}
 
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "card_type_id", referencedColumnName = "id")
 	public CardTypeEntity getCardTypeByCardTypeId() {
 		return cardTypeByCardTypeId;

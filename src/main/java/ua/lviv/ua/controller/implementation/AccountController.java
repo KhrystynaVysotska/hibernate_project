@@ -49,11 +49,6 @@ public class AccountController extends AbstractController<AccountEntity> {
 			String currentAccountNumber = input.next();
 			account.setCurrentAccountNumber(currentAccountNumber);
 
-			System.out.println("Create pin code: ");
-			String pin = input.next();
-			pinCode.setPin(pin);
-			account.setPinCodeByPinCodeId(pinCode);
-
 			System.out.println("Enter amount of money to keep (up to 1 million): ");
 			int amount = input.nextInt();
 			account.setAmount(amount);
@@ -63,6 +58,9 @@ public class AccountController extends AbstractController<AccountEntity> {
 				transaction = session.beginTransaction();
 				AccountOwnerEntity accountOwner = new AccountOwnerEntity();
 				BankEntity bank = new BankEntity();
+
+				pinCode = new PinCodeController().generateEntity();
+				account.setPinCodeByPinCodeId(pinCode);
 
 				System.out.println(
 						"Do you want to create new account owner or sign in with existing one? Create : Existing");

@@ -45,7 +45,7 @@ public class StreetController extends AbstractController<StreetEntity> {
 
 	public StreetEntity getByName() {
 		System.out.println("Enter street name: ");
-		String streetName = input.next();
+		String streetName = input.nextLine();
 		return streetService.getByField("name", streetName);
 	}
 }

@@ -1,5 +1,6 @@
 package ua.lviv.ua.controller.implementation;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import ua.lviv.ua.controller.AbstractController;
@@ -16,16 +17,36 @@ public class AccountTypeController extends AbstractController<AccountTypeEntity>
 		return accountTypeService;
 	}
 
+	@Override
+	public void create() {
+		AccountTypeEntity accountType = generateEntity();
+		if (accountType != null) {
+			accountTypeService.create(accountType);
+			if (accountType.getId() != null) {
+				System.out.println("Your have just created:\n" + accountType.toString());
+			} else {
+				System.out.println("[WARN] Something went wrong...");
+			}
+		}
+	}
+
+	public AccountTypeEntity generateEntity() {
+		AccountTypeEntity accountType = new AccountTypeEntity();
+		try {
+			System.out.println("Enter type: ");
+			String type = input.nextLine();
+			accountType.setType(type);
+		} catch (InputMismatchException e) {
+			System.out.println("Your input is not valid! Please, follow constraints!\n");
+			input.next();
+			return null;
+		}
+		return accountType;
+	}
+
 	public AccountTypeEntity getByType() {
 		System.out.println("Enter account type: ");
 		String accountType = input.nextLine();
 		return accountTypeService.getByField("type", accountType);
 	}
-
-	@Override
-	public void create() {
-		// TODO Auto-generated method stub
-
-	}
-
 }

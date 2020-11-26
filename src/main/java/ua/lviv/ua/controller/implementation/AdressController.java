@@ -18,6 +18,11 @@ public class AdressController extends AbstractController<AdressEntity> {
 	private AddressService addressService = new AddressService();
 
 	@Override
+	protected Service<AdressEntity> getService() {
+		return addressService;
+	}
+
+	@Override
 	public void create() {
 		AdressEntity adress = generateEntity();
 		if (adress != null) {
@@ -28,11 +33,6 @@ public class AdressController extends AbstractController<AdressEntity> {
 				System.out.println("[WARN] Something went wrong...");
 			}
 		}
-	}
-
-	@Override
-	protected Service<AdressEntity> getService() {
-		return addressService;
 	}
 
 	public AdressEntity generateEntity() {
