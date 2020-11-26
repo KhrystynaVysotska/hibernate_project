@@ -27,7 +27,7 @@ public class TransferService extends AbstractService<TransferEntity> {
 		if (sender.getAmount() < amountToTransfer) {
 			System.out.println("[WARN] You don't have enough money to make this transfer");
 			return null;
-		} else if (recipient.getId() == sender.getId()) {
+		} else if (recipient.equals(sender)) {
 			System.out.println("[WARN] You cannot transfer money to the same account!");
 			return null;
 		} else {
@@ -41,7 +41,9 @@ public class TransferService extends AbstractService<TransferEntity> {
 				create(transfer);
 				transaction.commit();
 			} catch (Exception ex) {
-				transaction.rollback();
+				if (transaction != null) {
+					transaction.rollback();
+				}
 			} finally {
 				new HibernateUtil().closeSession(session);
 			}
