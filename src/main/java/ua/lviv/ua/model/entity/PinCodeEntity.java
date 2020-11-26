@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import ua.lviv.ua.model.entity.formatter.Formatter;
 
 @Entity
 @Table(name = "pin_code", schema = "vysotska", catalog = "")
@@ -75,6 +76,8 @@ public class PinCodeEntity {
 
 	@Override
 	public String toString() {
-		return "PinCodeEntity [id=" + id + ", pin=" + pin + "]";
+		String[] columnsNames = { "pin_code_id", "pin" };
+		String[] columnValues = { id.toString(), pin };
+		return Formatter.formatRow(columnsNames, columnValues);
 	}
 }

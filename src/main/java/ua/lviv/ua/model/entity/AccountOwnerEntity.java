@@ -12,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import org.hibernate.annotations.NaturalId;
+import ua.lviv.ua.model.entity.formatter.Formatter;
 
 @Entity
 @Table(name = "account_owner", schema = "vysotska", catalog = "")
@@ -215,9 +216,13 @@ public class AccountOwnerEntity {
 
 	@Override
 	public String toString() {
-		return "AccountOwnerEntity [id=" + id + ", personalIdentificationNumber=" + personalIdentificationNumber
-				+ ", name=" + name + ", surname=" + surname + ", patronym=" + patronym + ", mobileNumber="
-				+ mobileNumber + ", email=" + email + ", birthDate=" + birthDate + ", adressByAdressId="
-				+ adressByAdressId + "]";
+		String[] columnsNames = { "account_owner_id", "personal_identification_number", "name", "surname", "patronym",
+				"mobile_number", "email", "birth_date", "city", "street", "building" };
+		String[] columnValues = { id.toString(), personalIdentificationNumber, name, surname, patronym, mobileNumber,
+				email, birthDate.toString(), adressByAdressId.getCityByCityId().getName(),
+				adressByAdressId.getStreetByStreetId().getName(),
+				adressByAdressId.getBuildingByBuildingId().getHouseNumber() + " "
+						+ adressByAdressId.getBuildingByBuildingId().getFlatNumber() };
+		return Formatter.formatRow(columnsNames, columnValues);
 	}
 }

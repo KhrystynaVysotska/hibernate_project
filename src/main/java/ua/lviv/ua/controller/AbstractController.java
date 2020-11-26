@@ -33,6 +33,7 @@ import ua.lviv.ua.model.entity.CurrencyEntity;
 import ua.lviv.ua.model.entity.PinCodeEntity;
 import ua.lviv.ua.model.entity.StreetEntity;
 import ua.lviv.ua.model.entity.TransferEntity;
+import ua.lviv.ua.model.entity.formatter.Formatter;
 import ua.lviv.ua.model.service.Service;
 
 public abstract class AbstractController<T> implements Controller<T> {
@@ -62,9 +63,8 @@ public abstract class AbstractController<T> implements Controller<T> {
 	@Override
 	public void getAll() {
 		List<T> entities = getService().getAll();
-		for (T entity : entities) {
-			System.out.println(entity);
-		}
+		Formatter<T> formatter = new Formatter<>();
+		formatter.formatTable(entities);
 	}
 
 	@Override

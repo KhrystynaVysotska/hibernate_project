@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import ua.lviv.ua.model.entity.formatter.Formatter;
 
 @Entity
 @Table(name = "adress", schema = "vysotska", catalog = "")
@@ -115,7 +116,9 @@ public class AdressEntity {
 
 	@Override
 	public String toString() {
-		return "AdressEntity [id=" + id + ", cityByCityId=" + cityByCityId + ", streetByStreetId=" + streetByStreetId
-				+ ", buildingByBuildingId=" + buildingByBuildingId + "]";
+		String[] columnsNames = { "address_id", "city", "street", "house number", "flat number" };
+		String[] columnValues = { id.toString(), cityByCityId.getName(), streetByStreetId.getName(),
+				buildingByBuildingId.getHouseNumber(), buildingByBuildingId.getFlatNumber() };
+		return Formatter.formatRow(columnsNames, columnValues);
 	}
 }

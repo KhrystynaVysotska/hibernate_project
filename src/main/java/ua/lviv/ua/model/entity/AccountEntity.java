@@ -12,6 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import org.hibernate.annotations.NaturalId;
+import ua.lviv.ua.model.entity.formatter.Formatter;
 
 @Entity
 @Table(name = "account", schema = "vysotska")
@@ -197,10 +198,12 @@ public class AccountEntity {
 
 	@Override
 	public String toString() {
-		return "AccountEntity [id=" + id + ", currentAccountNumber=" + currentAccountNumber + ", amount=" + amount
-				+ ", pinCodeByPinCodeId=" + pinCodeByPinCodeId + ", accountOwnerByAccountOwnerId="
-				+ accountOwnerByAccountOwnerId + ", bankByBankIdentificationCode=" + bankByBankIdentificationCode
-				+ ", currencyByCurrencyId=" + currencyByCurrencyId + ", accountTypeByAccountTypeId="
-				+ accountTypeByAccountTypeId + "]";
+		String[] columnsNames = { "account_id", "pin_code", "current_account_number", "amount", "account_owner",
+				"bank", "currency", "account_type" };
+		String[] columnValues = { id.toString(), pinCodeByPinCodeId.getPin(), currentAccountNumber, amount.toString(),
+				accountOwnerByAccountOwnerId.getName() + " " + accountOwnerByAccountOwnerId.getSurname(),
+				bankByBankIdentificationCode.getShortBankName(), currencyByCurrencyId.getName(),
+				accountTypeByAccountTypeId.getType() };
+		return Formatter.formatRow(columnsNames, columnValues);
 	}
 }

@@ -8,6 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import org.hibernate.annotations.NaturalId;
+import ua.lviv.ua.model.entity.formatter.Formatter;
 
 @Entity
 @Table(name = "city", schema = "vysotska", catalog = "")
@@ -115,6 +116,8 @@ public class CityEntity {
 
 	@Override
 	public String toString() {
-		return "CityEntity [id=" + id + ", name=" + name + ", zipCode=" + zipCode + ", phoneCode=" + phoneCode + "]";
+		String[] columnsNames = { "city_id", "name", "zip_code", "phone_code" };
+		String[] columnValues = { id.toString(), name, zipCode.toString(), phoneCode.toString() };
+		return Formatter.formatRow(columnsNames, columnValues);
 	}
 }

@@ -11,12 +11,13 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import ua.lviv.ua.model.entity.formatter.Formatter;
 
 @Entity
 @Table(name = "bank_card", schema = "vysotska", catalog = "")
 public class BankCardEntity {
 	private Integer id;
-	private Integer cvc2;
+	private Integer cvc2 = 0;
 	private Date dateOfExpire;
 	private AccountEntity accountByAccountId;
 	private CardTypeEntity cardTypeByCardTypeId;
@@ -136,7 +137,9 @@ public class BankCardEntity {
 
 	@Override
 	public String toString() {
-		return "BankCardEntity [id=" + id + ", cvc2=" + cvc2 + ", dateOfExpire=" + dateOfExpire
-				+ ", accountByAccountId=" + accountByAccountId + ", cardTypeByCardTypeId=" + cardTypeByCardTypeId + "]";
+		String[] columnsNames = { "bank_card_id", "account_number", "card_type", "cvc2", "date_of_expire" };
+		String[] columnValues = { id.toString(), accountByAccountId.getCurrentAccountNumber(),
+				cardTypeByCardTypeId.getName(), cvc2 == null ? "null" : cvc2.toString(), dateOfExpire.toString() };
+		return Formatter.formatRow(columnsNames, columnValues);
 	}
 }

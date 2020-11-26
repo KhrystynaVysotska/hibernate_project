@@ -8,6 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import org.hibernate.annotations.NaturalId;
+import ua.lviv.ua.model.entity.formatter.Formatter;
 
 @Entity
 @Table(name = "card_type", schema = "vysotska", catalog = "")
@@ -77,6 +78,8 @@ public class CardTypeEntity {
 
 	@Override
 	public String toString() {
-		return "CardTypeEntity [id=" + id + ", name=" + name + "]";
+		String[] columnsNames = { "card_type_id", "name" };
+		String[] columnValues = { id.toString(), name };
+		return Formatter.formatRow(columnsNames, columnValues);
 	}
 }

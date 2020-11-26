@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import ua.lviv.ua.model.entity.formatter.Formatter;
 
 @Entity
 @Table(name = "building", schema = "vysotska", catalog = "")
@@ -94,6 +95,8 @@ public class BuildingEntity {
 
 	@Override
 	public String toString() {
-		return "BuildingEntity [id=" + id + ", houseNumber=" + houseNumber + ", flatNumber=" + flatNumber + "]";
+		String[] columnsNames = { "building_id", "house_number", "flat_number" };
+		String[] columnValues = { id.toString(), houseNumber, flatNumber };
+		return Formatter.formatRow(columnsNames, columnValues);
 	}
 }

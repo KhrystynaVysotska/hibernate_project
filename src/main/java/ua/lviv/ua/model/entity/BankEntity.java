@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import ua.lviv.ua.model.entity.formatter.Formatter;
 
 @Entity
 @Table(name = "bank", schema = "vysotska", catalog = "")
@@ -149,8 +150,10 @@ public class BankEntity {
 
 	@Override
 	public String toString() {
-		return "BankEntity [identificationCode=" + identificationCode + ", stateRegistrationCode="
-				+ stateRegistrationCode + ", fullBankName=" + fullBankName + ", shortBankName=" + shortBankName
-				+ ", bankLicenseNumber=" + bankLicenseNumber + ", bankLicenseDate=" + bankLicenseDate + "]";
+		String[] columnsNames = { "identification_code", "state_registration_code", "full_bank_name", "short_bank_name",
+				"bank_license_number", "bank_license_date" };
+		String[] columnValues = { identificationCode.toString(), stateRegistrationCode.toString(), fullBankName,
+				shortBankName, bankLicenseNumber.toString(), bankLicenseDate.toString() };
+		return Formatter.formatRow(columnsNames, columnValues);
 	}
 }

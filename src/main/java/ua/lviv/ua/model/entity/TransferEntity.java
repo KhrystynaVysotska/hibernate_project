@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import ua.lviv.ua.model.entity.formatter.Formatter;
 
 @Entity
 @Table(name = "transfer", schema = "vysotska", catalog = "")
@@ -193,9 +194,12 @@ public class TransferEntity {
 
 	@Override
 	public String toString() {
-		return "TransferEntity [id=" + id + ", amount=" + amount + ", date=" + date + ", time=" + time
-				+ ", purposeOfPayment=" + purposeOfPayment + ", accountBySenderAccountId=" + accountBySenderAccountId
-				+ ", accountByRecipientAccountId=" + accountByRecipientAccountId + ", currencyByCurrencyId="
-				+ currencyByCurrencyId + "]";
+		String[] columnsNames = { "transfer_id", "sender_account_number", "recipient_account_number", "amount",
+				"currency", "date", "time", "purpose_of_payment" };
+		String[] columnValues = { id.toString(), accountBySenderAccountId.getCurrentAccountNumber(),
+				accountByRecipientAccountId.getCurrentAccountNumber(), amount.toString(),
+				currencyByCurrencyId.getName(), date.toString(), time.toString(),
+				purposeOfPayment != null ? purposeOfPayment : "not specified" };
+		return Formatter.formatRow(columnsNames, columnValues);
 	}
 }
