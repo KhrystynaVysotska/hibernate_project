@@ -7,7 +7,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
-
 import ua.lviv.ua.controller.implementation.AccountController;
 import ua.lviv.ua.controller.implementation.AccountOwnerController;
 import ua.lviv.ua.controller.implementation.AccountTypeController;
@@ -41,6 +40,7 @@ public abstract class AbstractController<T> implements Controller<T> {
 
 	@SuppressWarnings("rawtypes")
 	private static final Map<Class, AbstractController> CUSTOM_JAVA_CLASSES = new HashMap<>();
+
 	static {
 		CUSTOM_JAVA_CLASSES.put(AccountEntity.class, new AccountController());
 		CUSTOM_JAVA_CLASSES.put(AccountOwnerEntity.class, new AccountOwnerController());

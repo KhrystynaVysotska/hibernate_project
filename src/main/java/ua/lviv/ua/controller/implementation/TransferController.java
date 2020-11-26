@@ -5,10 +5,8 @@ import java.sql.Time;
 import java.time.LocalTime;
 import java.util.InputMismatchException;
 import java.util.Scanner;
-
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-
 import ua.lviv.ua.controller.AbstractController;
 import ua.lviv.ua.model.entity.AccountEntity;
 import ua.lviv.ua.model.entity.CurrencyEntity;

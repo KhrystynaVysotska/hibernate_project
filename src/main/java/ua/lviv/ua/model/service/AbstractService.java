@@ -1,7 +1,6 @@
 package ua.lviv.ua.model.service;
 
 import java.util.List;
-
 import ua.lviv.ua.model.dao.DataAccess;
 
 public abstract class AbstractService<T> implements Service<T> {

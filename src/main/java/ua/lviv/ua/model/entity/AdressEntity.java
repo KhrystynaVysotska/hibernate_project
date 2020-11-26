@@ -1,6 +1,14 @@
 package ua.lviv.ua.model.entity;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "adress", schema = "vysotska", catalog = "")
@@ -22,23 +30,57 @@ public class AdressEntity {
 	}
 
 	@Override
-	public boolean equals(Object o) {
-		if (this == o)
+	public boolean equals(Object obj) {
+		if (this == obj) {
 			return true;
-		if (o == null || getClass() != o.getClass())
+		}
+		if (obj == null) {
 			return false;
-
-		AdressEntity that = (AdressEntity) o;
-
-		if (id != null ? !id.equals(that.id) : that.id != null)
+		}
+		if (getClass() != obj.getClass()) {
 			return false;
-
+		}
+		AdressEntity other = (AdressEntity) obj;
+		if (buildingByBuildingId == null) {
+			if (other.buildingByBuildingId != null) {
+				return false;
+			}
+		} else if (!buildingByBuildingId.equals(other.buildingByBuildingId)) {
+			return false;
+		}
+		if (cityByCityId == null) {
+			if (other.cityByCityId != null) {
+				return false;
+			}
+		} else if (!cityByCityId.equals(other.cityByCityId)) {
+			return false;
+		}
+		if (id == null) {
+			if (other.id != null) {
+				return false;
+			}
+		} else if (!id.equals(other.id)) {
+			return false;
+		}
+		if (streetByStreetId == null) {
+			if (other.streetByStreetId != null) {
+				return false;
+			}
+		} else if (!streetByStreetId.equals(other.streetByStreetId)) {
+			return false;
+		}
 		return true;
 	}
 
 	@Override
 	public int hashCode() {
-		return id != null ? id.hashCode() : 0;
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((buildingByBuildingId == null) ? 0 : buildingByBuildingId.hashCode());
+		result = prime * result + ((cityByCityId == null) ? 0 : cityByCityId.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((streetByStreetId == null) ? 0 : streetByStreetId.hashCode());
+		return result;
 	}
 
 	@ManyToOne(cascade = CascadeType.ALL)

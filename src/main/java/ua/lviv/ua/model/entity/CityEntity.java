@@ -1,7 +1,12 @@
 package ua.lviv.ua.model.entity;
 
-import javax.persistence.*;
-
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import org.hibernate.annotations.NaturalId;
 
 @Entity
@@ -55,32 +60,56 @@ public class CityEntity {
 	}
 
 	@Override
-	public boolean equals(Object o) {
-		if (this == o)
+	public boolean equals(Object obj) {
+		if (this == obj) {
 			return true;
-		if (o == null || getClass() != o.getClass())
+		}
+		if (obj == null) {
 			return false;
-
-		CityEntity that = (CityEntity) o;
-
-		if (id != null ? !id.equals(that.id) : that.id != null)
+		}
+		if (getClass() != obj.getClass()) {
 			return false;
-		if (name != null ? !name.equals(that.name) : that.name != null)
+		}
+		CityEntity other = (CityEntity) obj;
+		if (id == null) {
+			if (other.id != null) {
+				return false;
+			}
+		} else if (!id.equals(other.id)) {
 			return false;
-		if (zipCode != null ? !zipCode.equals(that.zipCode) : that.zipCode != null)
+		}
+		if (name == null) {
+			if (other.name != null) {
+				return false;
+			}
+		} else if (!name.equals(other.name)) {
 			return false;
-		if (phoneCode != null ? !phoneCode.equals(that.phoneCode) : that.phoneCode != null)
+		}
+		if (phoneCode == null) {
+			if (other.phoneCode != null) {
+				return false;
+			}
+		} else if (!phoneCode.equals(other.phoneCode)) {
 			return false;
-
+		}
+		if (zipCode == null) {
+			if (other.zipCode != null) {
+				return false;
+			}
+		} else if (!zipCode.equals(other.zipCode)) {
+			return false;
+		}
 		return true;
 	}
 
 	@Override
 	public int hashCode() {
-		int result = id != null ? id.hashCode() : 0;
-		result = 31 * result + (name != null ? name.hashCode() : 0);
-		result = 31 * result + (zipCode != null ? zipCode.hashCode() : 0);
-		result = 31 * result + (phoneCode != null ? phoneCode.hashCode() : 0);
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((phoneCode == null) ? 0 : phoneCode.hashCode());
+		result = prime * result + ((zipCode == null) ? 0 : zipCode.hashCode());
 		return result;
 	}
 

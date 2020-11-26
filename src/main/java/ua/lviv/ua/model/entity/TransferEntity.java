@@ -1,8 +1,16 @@
 package ua.lviv.ua.model.entity;
 
-import javax.persistence.*;
 import java.sql.Date;
 import java.sql.Time;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "transfer", schema = "vysotska", catalog = "")
@@ -68,35 +76,88 @@ public class TransferEntity {
 	}
 
 	@Override
-	public boolean equals(Object o) {
-		if (this == o)
+	public boolean equals(Object obj) {
+		if (this == obj) {
 			return true;
-		if (o == null || getClass() != o.getClass())
+		}
+		if (obj == null) {
 			return false;
-
-		TransferEntity that = (TransferEntity) o;
-
-		if (id != null ? !id.equals(that.id) : that.id != null)
+		}
+		if (getClass() != obj.getClass()) {
 			return false;
-		if (amount != null ? !amount.equals(that.amount) : that.amount != null)
+		}
+		TransferEntity other = (TransferEntity) obj;
+		if (accountByRecipientAccountId == null) {
+			if (other.accountByRecipientAccountId != null) {
+				return false;
+			}
+		} else if (!accountByRecipientAccountId.equals(other.accountByRecipientAccountId)) {
 			return false;
-		if (date != null ? !date.equals(that.date) : that.date != null)
+		}
+		if (accountBySenderAccountId == null) {
+			if (other.accountBySenderAccountId != null) {
+				return false;
+			}
+		} else if (!accountBySenderAccountId.equals(other.accountBySenderAccountId)) {
 			return false;
-		if (time != null ? !time.equals(that.time) : that.time != null)
+		}
+		if (amount == null) {
+			if (other.amount != null) {
+				return false;
+			}
+		} else if (!amount.equals(other.amount)) {
 			return false;
-		if (purposeOfPayment != null ? !purposeOfPayment.equals(that.purposeOfPayment) : that.purposeOfPayment != null)
+		}
+		if (currencyByCurrencyId == null) {
+			if (other.currencyByCurrencyId != null) {
+				return false;
+			}
+		} else if (!currencyByCurrencyId.equals(other.currencyByCurrencyId)) {
 			return false;
-
+		}
+		if (date == null) {
+			if (other.date != null) {
+				return false;
+			}
+		} else if (!date.equals(other.date)) {
+			return false;
+		}
+		if (id == null) {
+			if (other.id != null) {
+				return false;
+			}
+		} else if (!id.equals(other.id)) {
+			return false;
+		}
+		if (purposeOfPayment == null) {
+			if (other.purposeOfPayment != null) {
+				return false;
+			}
+		} else if (!purposeOfPayment.equals(other.purposeOfPayment)) {
+			return false;
+		}
+		if (time == null) {
+			if (other.time != null) {
+				return false;
+			}
+		} else if (!time.equals(other.time)) {
+			return false;
+		}
 		return true;
 	}
 
 	@Override
 	public int hashCode() {
-		int result = id != null ? id.hashCode() : 0;
-		result = 31 * result + (amount != null ? amount.hashCode() : 0);
-		result = 31 * result + (date != null ? date.hashCode() : 0);
-		result = 31 * result + (time != null ? time.hashCode() : 0);
-		result = 31 * result + (purposeOfPayment != null ? purposeOfPayment.hashCode() : 0);
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((accountByRecipientAccountId == null) ? 0 : accountByRecipientAccountId.hashCode());
+		result = prime * result + ((accountBySenderAccountId == null) ? 0 : accountBySenderAccountId.hashCode());
+		result = prime * result + ((amount == null) ? 0 : amount.hashCode());
+		result = prime * result + ((currencyByCurrencyId == null) ? 0 : currencyByCurrencyId.hashCode());
+		result = prime * result + ((date == null) ? 0 : date.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((purposeOfPayment == null) ? 0 : purposeOfPayment.hashCode());
+		result = prime * result + ((time == null) ? 0 : time.hashCode());
 		return result;
 	}
 

@@ -5,7 +5,6 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
-
 import ua.lviv.ua.model.entity.AccountEntity;
 import ua.lviv.ua.model.entity.AccountOwnerEntity;
 import ua.lviv.ua.model.entity.AccountTypeEntity;
@@ -27,7 +26,6 @@ public class HibernateUtil {
 		if (sessionFactory == null) {
 			try {
 				Configuration configuration = new Configuration().configure();
-				StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder();
 				configuration.addAnnotatedClass(AccountEntity.class);
 				configuration.addAnnotatedClass(AccountOwnerEntity.class);
 				configuration.addAnnotatedClass(AccountTypeEntity.class);
@@ -41,6 +39,7 @@ public class HibernateUtil {
 				configuration.addAnnotatedClass(PinCodeEntity.class);
 				configuration.addAnnotatedClass(StreetEntity.class);
 				configuration.addAnnotatedClass(TransferEntity.class);
+				StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder();
 				builder.applySettings(configuration.getProperties());
 				sessionFactory = configuration.buildSessionFactory(builder.build());
 			} catch (Exception exeption) {

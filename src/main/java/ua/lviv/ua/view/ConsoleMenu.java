@@ -4,7 +4,6 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Scanner;
-
 import ua.lviv.ua.controller.implementation.AccountController;
 import ua.lviv.ua.controller.implementation.AccountOwnerController;
 import ua.lviv.ua.controller.implementation.AccountTypeController;

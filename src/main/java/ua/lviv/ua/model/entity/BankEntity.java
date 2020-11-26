@@ -1,7 +1,11 @@
 package ua.lviv.ua.model.entity;
 
-import javax.persistence.*;
 import java.sql.Date;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "bank", schema = "vysotska", catalog = "")
@@ -74,41 +78,72 @@ public class BankEntity {
 	}
 
 	@Override
-	public boolean equals(Object o) {
-		if (this == o)
+	public boolean equals(Object obj) {
+		if (this == obj) {
 			return true;
-		if (o == null || getClass() != o.getClass())
+		}
+		if (obj == null) {
 			return false;
-
-		BankEntity that = (BankEntity) o;
-
-		if (identificationCode != null ? !identificationCode.equals(that.identificationCode)
-				: that.identificationCode != null)
+		}
+		if (getClass() != obj.getClass()) {
 			return false;
-		if (stateRegistrationCode != null ? !stateRegistrationCode.equals(that.stateRegistrationCode)
-				: that.stateRegistrationCode != null)
+		}
+		BankEntity other = (BankEntity) obj;
+		if (bankLicenseDate == null) {
+			if (other.bankLicenseDate != null) {
+				return false;
+			}
+		} else if (!bankLicenseDate.equals(other.bankLicenseDate)) {
 			return false;
-		if (fullBankName != null ? !fullBankName.equals(that.fullBankName) : that.fullBankName != null)
+		}
+		if (bankLicenseNumber == null) {
+			if (other.bankLicenseNumber != null) {
+				return false;
+			}
+		} else if (!bankLicenseNumber.equals(other.bankLicenseNumber)) {
 			return false;
-		if (shortBankName != null ? !shortBankName.equals(that.shortBankName) : that.shortBankName != null)
+		}
+		if (fullBankName == null) {
+			if (other.fullBankName != null) {
+				return false;
+			}
+		} else if (!fullBankName.equals(other.fullBankName)) {
 			return false;
-		if (bankLicenseNumber != null ? !bankLicenseNumber.equals(that.bankLicenseNumber)
-				: that.bankLicenseNumber != null)
+		}
+		if (identificationCode == null) {
+			if (other.identificationCode != null) {
+				return false;
+			}
+		} else if (!identificationCode.equals(other.identificationCode)) {
 			return false;
-		if (bankLicenseDate != null ? !bankLicenseDate.equals(that.bankLicenseDate) : that.bankLicenseDate != null)
+		}
+		if (shortBankName == null) {
+			if (other.shortBankName != null) {
+				return false;
+			}
+		} else if (!shortBankName.equals(other.shortBankName)) {
 			return false;
-
+		}
+		if (stateRegistrationCode == null) {
+			if (other.stateRegistrationCode != null) {
+				return false;
+			}
+		} else if (!stateRegistrationCode.equals(other.stateRegistrationCode)) {
+			return false;
+		}
 		return true;
 	}
 
 	@Override
 	public int hashCode() {
-		int result = identificationCode != null ? identificationCode.hashCode() : 0;
-		result = 31 * result + (stateRegistrationCode != null ? stateRegistrationCode.hashCode() : 0);
-		result = 31 * result + (fullBankName != null ? fullBankName.hashCode() : 0);
-		result = 31 * result + (shortBankName != null ? shortBankName.hashCode() : 0);
-		result = 31 * result + (bankLicenseNumber != null ? bankLicenseNumber.hashCode() : 0);
-		result = 31 * result + (bankLicenseDate != null ? bankLicenseDate.hashCode() : 0);
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((bankLicenseDate == null) ? 0 : bankLicenseDate.hashCode());
+		result = prime * result + ((bankLicenseNumber == null) ? 0 : bankLicenseNumber.hashCode());
+		result = prime * result + ((fullBankName == null) ? 0 : fullBankName.hashCode());
+		result = prime * result + ((identificationCode == null) ? 0 : identificationCode.hashCode());
+		result = prime * result + ((shortBankName == null) ? 0 : shortBankName.hashCode());
+		result = prime * result + ((stateRegistrationCode == null) ? 0 : stateRegistrationCode.hashCode());
 		return result;
 	}
 

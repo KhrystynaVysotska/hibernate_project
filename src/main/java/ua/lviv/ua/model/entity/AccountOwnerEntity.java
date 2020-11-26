@@ -1,10 +1,17 @@
 package ua.lviv.ua.model.entity;
 
-import javax.persistence.*;
-
-import org.hibernate.annotations.NaturalId;
-
 import java.sql.Date;
+import javax.persistence.Basic;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import org.hibernate.annotations.NaturalId;
 
 @Entity
 @Table(name = "account_owner", schema = "vysotska", catalog = "")
@@ -102,46 +109,97 @@ public class AccountOwnerEntity {
 	}
 
 	@Override
-	public boolean equals(Object o) {
-		if (this == o)
+	public boolean equals(Object obj) {
+		if (this == obj) {
 			return true;
-		if (o == null || getClass() != o.getClass())
+		}
+		if (obj == null) {
 			return false;
-
-		AccountOwnerEntity that = (AccountOwnerEntity) o;
-
-		if (id != null ? !id.equals(that.id) : that.id != null)
+		}
+		if (getClass() != obj.getClass()) {
 			return false;
-		if (personalIdentificationNumber != null
-				? !personalIdentificationNumber.equals(that.personalIdentificationNumber)
-				: that.personalIdentificationNumber != null)
+		}
+		AccountOwnerEntity other = (AccountOwnerEntity) obj;
+		if (adressByAdressId == null) {
+			if (other.adressByAdressId != null) {
+				return false;
+			}
+		} else if (!adressByAdressId.equals(other.adressByAdressId)) {
 			return false;
-		if (name != null ? !name.equals(that.name) : that.name != null)
+		}
+		if (birthDate == null) {
+			if (other.birthDate != null) {
+				return false;
+			}
+		} else if (!birthDate.equals(other.birthDate)) {
 			return false;
-		if (surname != null ? !surname.equals(that.surname) : that.surname != null)
+		}
+		if (email == null) {
+			if (other.email != null) {
+				return false;
+			}
+		} else if (!email.equals(other.email)) {
 			return false;
-		if (patronym != null ? !patronym.equals(that.patronym) : that.patronym != null)
+		}
+		if (id == null) {
+			if (other.id != null) {
+				return false;
+			}
+		} else if (!id.equals(other.id)) {
 			return false;
-		if (mobileNumber != null ? !mobileNumber.equals(that.mobileNumber) : that.mobileNumber != null)
+		}
+		if (mobileNumber == null) {
+			if (other.mobileNumber != null) {
+				return false;
+			}
+		} else if (!mobileNumber.equals(other.mobileNumber)) {
 			return false;
-		if (email != null ? !email.equals(that.email) : that.email != null)
+		}
+		if (name == null) {
+			if (other.name != null) {
+				return false;
+			}
+		} else if (!name.equals(other.name)) {
 			return false;
-		if (birthDate != null ? !birthDate.equals(that.birthDate) : that.birthDate != null)
+		}
+		if (patronym == null) {
+			if (other.patronym != null) {
+				return false;
+			}
+		} else if (!patronym.equals(other.patronym)) {
 			return false;
-
+		}
+		if (personalIdentificationNumber == null) {
+			if (other.personalIdentificationNumber != null) {
+				return false;
+			}
+		} else if (!personalIdentificationNumber.equals(other.personalIdentificationNumber)) {
+			return false;
+		}
+		if (surname == null) {
+			if (other.surname != null) {
+				return false;
+			}
+		} else if (!surname.equals(other.surname)) {
+			return false;
+		}
 		return true;
 	}
 
 	@Override
 	public int hashCode() {
-		int result = id != null ? id.hashCode() : 0;
-		result = 31 * result + (personalIdentificationNumber != null ? personalIdentificationNumber.hashCode() : 0);
-		result = 31 * result + (name != null ? name.hashCode() : 0);
-		result = 31 * result + (surname != null ? surname.hashCode() : 0);
-		result = 31 * result + (patronym != null ? patronym.hashCode() : 0);
-		result = 31 * result + (mobileNumber != null ? mobileNumber.hashCode() : 0);
-		result = 31 * result + (email != null ? email.hashCode() : 0);
-		result = 31 * result + (birthDate != null ? birthDate.hashCode() : 0);
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((adressByAdressId == null) ? 0 : adressByAdressId.hashCode());
+		result = prime * result + ((birthDate == null) ? 0 : birthDate.hashCode());
+		result = prime * result + ((email == null) ? 0 : email.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((mobileNumber == null) ? 0 : mobileNumber.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((patronym == null) ? 0 : patronym.hashCode());
+		result = prime * result
+				+ ((personalIdentificationNumber == null) ? 0 : personalIdentificationNumber.hashCode());
+		result = prime * result + ((surname == null) ? 0 : surname.hashCode());
 		return result;
 	}
 

@@ -2,10 +2,8 @@ package ua.lviv.ua.controller.implementation;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
-
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-
 import ua.lviv.ua.controller.AbstractController;
 import ua.lviv.ua.model.entity.AccountEntity;
 import ua.lviv.ua.model.entity.AccountOwnerEntity;
@@ -56,12 +54,11 @@ public class AccountController extends AbstractController<AccountEntity> {
 			try {
 				session = new HibernateUtil().getSession();
 				transaction = session.beginTransaction();
-				AccountOwnerEntity accountOwner = null;
-				BankEntity bank = null;
 
 				pinCode = new PinCodeController().generateEntity();
 				account.setPinCodeByPinCodeId(pinCode);
 
+				AccountOwnerEntity accountOwner = null;
 				System.out.println(
 						"Do you want to create new account owner or sign in with existing one? Create : Existing");
 				String response = input.next().trim().toLowerCase();
@@ -72,6 +69,7 @@ public class AccountController extends AbstractController<AccountEntity> {
 				}
 				account.setAccountOwnerByAccountOwnerId(accountOwner);
 
+				BankEntity bank = null;
 				System.out.println("Do you want to create new bank or use existing one? Create : Existing");
 				response = input.next().trim().toLowerCase();
 				bank = response.equals("create") ? new BankController().generateEntity()

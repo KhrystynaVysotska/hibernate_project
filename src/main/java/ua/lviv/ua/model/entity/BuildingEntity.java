@@ -1,6 +1,12 @@
 package ua.lviv.ua.model.entity;
 
-import javax.persistence.*;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "building", schema = "vysotska", catalog = "")
@@ -41,29 +47,48 @@ public class BuildingEntity {
 	}
 
 	@Override
-	public boolean equals(Object o) {
-		if (this == o)
+	public boolean equals(Object obj) {
+		if (this == obj) {
 			return true;
-		if (o == null || getClass() != o.getClass())
+		}
+		if (obj == null) {
 			return false;
-
-		BuildingEntity that = (BuildingEntity) o;
-
-		if (id != null ? !id.equals(that.id) : that.id != null)
+		}
+		if (getClass() != obj.getClass()) {
 			return false;
-		if (houseNumber != null ? !houseNumber.equals(that.houseNumber) : that.houseNumber != null)
+		}
+		BuildingEntity other = (BuildingEntity) obj;
+		if (flatNumber == null) {
+			if (other.flatNumber != null) {
+				return false;
+			}
+		} else if (!flatNumber.equals(other.flatNumber)) {
 			return false;
-		if (flatNumber != null ? !flatNumber.equals(that.flatNumber) : that.flatNumber != null)
+		}
+		if (houseNumber == null) {
+			if (other.houseNumber != null) {
+				return false;
+			}
+		} else if (!houseNumber.equals(other.houseNumber)) {
 			return false;
-
+		}
+		if (id == null) {
+			if (other.id != null) {
+				return false;
+			}
+		} else if (!id.equals(other.id)) {
+			return false;
+		}
 		return true;
 	}
 
 	@Override
 	public int hashCode() {
-		int result = id != null ? id.hashCode() : 0;
-		result = 31 * result + (houseNumber != null ? houseNumber.hashCode() : 0);
-		result = 31 * result + (flatNumber != null ? flatNumber.hashCode() : 0);
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((flatNumber == null) ? 0 : flatNumber.hashCode());
+		result = prime * result + ((houseNumber == null) ? 0 : houseNumber.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
 

@@ -1,11 +1,9 @@
 package ua.lviv.ua.model.dao;
 
 import java.util.List;
-
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-
 import ua.lviv.ua.utils.HibernateUtil;
 
 public abstract class AbstractDataAccess<T> implements DataAccess<T> {

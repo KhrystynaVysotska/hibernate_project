@@ -2,7 +2,6 @@ package ua.lviv.ua.model.service.implementation;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-
 import ua.lviv.ua.model.dao.DataAccess;
 import ua.lviv.ua.model.dao.implementation.TransferDataAccess;
 import ua.lviv.ua.model.entity.AccountEntity;

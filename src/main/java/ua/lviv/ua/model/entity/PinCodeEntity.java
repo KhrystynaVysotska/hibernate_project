@@ -1,6 +1,12 @@
 package ua.lviv.ua.model.entity;
 
-import javax.persistence.*;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "pin_code", schema = "vysotska", catalog = "")
@@ -30,26 +36,40 @@ public class PinCodeEntity {
 	}
 
 	@Override
-	public boolean equals(Object o) {
-		if (this == o)
+	public boolean equals(Object obj) {
+		if (this == obj) {
 			return true;
-		if (o == null || getClass() != o.getClass())
+		}
+		if (obj == null) {
 			return false;
-
-		PinCodeEntity that = (PinCodeEntity) o;
-
-		if (id != null ? !id.equals(that.id) : that.id != null)
+		}
+		if (getClass() != obj.getClass()) {
 			return false;
-		if (pin != null ? !pin.equals(that.pin) : that.pin != null)
+		}
+		PinCodeEntity other = (PinCodeEntity) obj;
+		if (id == null) {
+			if (other.id != null) {
+				return false;
+			}
+		} else if (!id.equals(other.id)) {
 			return false;
-
+		}
+		if (pin == null) {
+			if (other.pin != null) {
+				return false;
+			}
+		} else if (!pin.equals(other.pin)) {
+			return false;
+		}
 		return true;
 	}
 
 	@Override
 	public int hashCode() {
-		int result = id != null ? id.hashCode() : 0;
-		result = 31 * result + (pin != null ? pin.hashCode() : 0);
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((pin == null) ? 0 : pin.hashCode());
 		return result;
 	}
 

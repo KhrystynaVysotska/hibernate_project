@@ -1,7 +1,6 @@
 package ua.lviv.ua.controller.implementation;
 
 import java.util.Scanner;
-
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import ua.lviv.ua.controller.AbstractController;

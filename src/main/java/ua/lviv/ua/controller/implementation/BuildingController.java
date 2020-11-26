@@ -2,7 +2,6 @@ package ua.lviv.ua.controller.implementation;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
-
 import ua.lviv.ua.controller.AbstractController;
 import ua.lviv.ua.model.entity.BuildingEntity;
 import ua.lviv.ua.model.service.Service;

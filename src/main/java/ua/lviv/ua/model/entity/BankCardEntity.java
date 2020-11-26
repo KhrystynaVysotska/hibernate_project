@@ -1,7 +1,16 @@
 package ua.lviv.ua.model.entity;
 
-import javax.persistence.*;
 import java.sql.Date;
+import javax.persistence.Basic;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "bank_card", schema = "vysotska", catalog = "")
@@ -44,29 +53,64 @@ public class BankCardEntity {
 	}
 
 	@Override
-	public boolean equals(Object o) {
-		if (this == o)
+	public boolean equals(Object obj) {
+		if (this == obj) {
 			return true;
-		if (o == null || getClass() != o.getClass())
+		}
+		if (obj == null) {
 			return false;
-
-		BankCardEntity that = (BankCardEntity) o;
-
-		if (id != null ? !id.equals(that.id) : that.id != null)
+		}
+		if (getClass() != obj.getClass()) {
 			return false;
-		if (cvc2 != null ? !cvc2.equals(that.cvc2) : that.cvc2 != null)
+		}
+		BankCardEntity other = (BankCardEntity) obj;
+		if (accountByAccountId == null) {
+			if (other.accountByAccountId != null) {
+				return false;
+			}
+		} else if (!accountByAccountId.equals(other.accountByAccountId)) {
 			return false;
-		if (dateOfExpire != null ? !dateOfExpire.equals(that.dateOfExpire) : that.dateOfExpire != null)
+		}
+		if (cardTypeByCardTypeId == null) {
+			if (other.cardTypeByCardTypeId != null) {
+				return false;
+			}
+		} else if (!cardTypeByCardTypeId.equals(other.cardTypeByCardTypeId)) {
 			return false;
-
+		}
+		if (cvc2 == null) {
+			if (other.cvc2 != null) {
+				return false;
+			}
+		} else if (!cvc2.equals(other.cvc2)) {
+			return false;
+		}
+		if (dateOfExpire == null) {
+			if (other.dateOfExpire != null) {
+				return false;
+			}
+		} else if (!dateOfExpire.equals(other.dateOfExpire)) {
+			return false;
+		}
+		if (id == null) {
+			if (other.id != null) {
+				return false;
+			}
+		} else if (!id.equals(other.id)) {
+			return false;
+		}
 		return true;
 	}
 
 	@Override
 	public int hashCode() {
-		int result = id != null ? id.hashCode() : 0;
-		result = 31 * result + (cvc2 != null ? cvc2.hashCode() : 0);
-		result = 31 * result + (dateOfExpire != null ? dateOfExpire.hashCode() : 0);
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((accountByAccountId == null) ? 0 : accountByAccountId.hashCode());
+		result = prime * result + ((cardTypeByCardTypeId == null) ? 0 : cardTypeByCardTypeId.hashCode());
+		result = prime * result + ((cvc2 == null) ? 0 : cvc2.hashCode());
+		result = prime * result + ((dateOfExpire == null) ? 0 : dateOfExpire.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
 
