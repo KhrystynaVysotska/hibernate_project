@@ -37,9 +37,9 @@ public class AdressController extends AbstractController<AdressEntity> {
 
 	public AdressEntity generateEntity() {
 		AdressEntity addressEntity = new AdressEntity();
-		CityEntity city = new CityEntity();
-		StreetEntity street = new StreetEntity();
-		BuildingEntity building = new BuildingEntity();
+		CityEntity city = null;
+		StreetEntity street = null;
+		BuildingEntity building = null;
 		Session session = null;
 		Transaction transaction = null;
 		try {
@@ -75,7 +75,9 @@ public class AdressController extends AbstractController<AdressEntity> {
 			transaction.commit();
 		} catch (Exception exception) {
 			System.out.println(exception.getMessage());
-			transaction.rollback();
+			if (transaction != null) {
+				transaction.rollback();
+			}
 			return null;
 		} finally {
 			new HibernateUtil().closeSession(session);

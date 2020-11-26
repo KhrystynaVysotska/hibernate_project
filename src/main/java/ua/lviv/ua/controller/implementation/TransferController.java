@@ -41,8 +41,8 @@ public class TransferController extends AbstractController<TransferEntity> {
 
 	public TransferEntity generateEntity() {
 		TransferEntity transfer = new TransferEntity();
-		AccountEntity sender = new AccountEntity();
-		AccountEntity recipient = new AccountEntity();
+		AccountEntity sender = null;
+		AccountEntity recipient = null;
 		Session session = null;
 		Transaction transaction = null;
 		try {
@@ -88,7 +88,9 @@ public class TransferController extends AbstractController<TransferEntity> {
 			return null;
 		} catch (Exception exception) {
 			System.out.println(exception.getMessage());
-			transaction.rollback();
+			if (transaction != null) {
+				transaction.rollback();
+			}
 			return null;
 		} finally {
 			new HibernateUtil().closeSession(session);

@@ -36,8 +36,8 @@ public class BankCardController extends AbstractController<BankCardEntity> {
 
 	public BankCardEntity generateEntity() {
 		BankCardEntity bankCard = new BankCardEntity();
-		AccountEntity account = new AccountEntity();
-		CardTypeEntity cardType = new CardTypeEntity();
+		AccountEntity account = null;
+		CardTypeEntity cardType = null;
 		Session session = null;
 		Transaction transaction = null;
 		try {
@@ -82,7 +82,9 @@ public class BankCardController extends AbstractController<BankCardEntity> {
 				transaction.commit();
 			} catch (Exception exception) {
 				System.out.println(exception.getMessage());
-				transaction.rollback();
+				if (transaction != null) {
+					transaction.rollback();
+				}
 				return null;
 			} finally {
 				new HibernateUtil().closeSession(session);

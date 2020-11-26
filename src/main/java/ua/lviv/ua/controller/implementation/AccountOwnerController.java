@@ -45,7 +45,7 @@ public class AccountOwnerController extends AbstractController<AccountOwnerEntit
 
 	public AccountOwnerEntity generateEntity() {
 		AccountOwnerEntity accountOwner = new AccountOwnerEntity();
-		AdressEntity address = new AdressEntity();
+		AdressEntity address = null;
 		Session session = null;
 		Transaction transaction = null;
 		try {
@@ -106,7 +106,9 @@ public class AccountOwnerController extends AbstractController<AccountOwnerEntit
 				transaction.commit();
 			} catch (Exception exception) {
 				System.out.println(exception.getMessage());
-				transaction.rollback();
+				if (transaction != null) {
+					transaction.rollback();
+				}
 				return null;
 			} finally {
 				new HibernateUtil().closeSession(session);
