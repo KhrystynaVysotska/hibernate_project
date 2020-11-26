@@ -134,7 +134,17 @@ public abstract class AbstractController<T> implements Controller<T> {
 					} else if (type == Integer.class) {
 						field.set(entity, Integer.parseInt(newValue));
 					} else if (type == Date.class) {
-						field.set(entity, Date.valueOf(newValue));
+						while (!newValue.matches("[\\d]{4}([-][\\d]{2}){2}")) {
+							System.out.println("Wrong format! Please, input date in format yyyy-mm-dd");
+							newValue = input.next();
+						}
+						try {
+							field.set(entity, Date.valueOf(newValue));
+						} catch (IllegalArgumentException e) {
+							System.out.println("Your date is incorrect! Check and try again!\n");
+							return false;
+						}
+
 					} else if (type == Long.class) {
 						field.set(entity, Long.parseLong(newValue));
 					} else if (type == Time.class) {

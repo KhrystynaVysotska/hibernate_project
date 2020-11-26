@@ -111,4 +111,11 @@ public class BankEntity {
 		result = 31 * result + (bankLicenseDate != null ? bankLicenseDate.hashCode() : 0);
 		return result;
 	}
+
+	@Override
+	public String toString() {
+		return "BankEntity [identificationCode=" + identificationCode + ", stateRegistrationCode="
+				+ stateRegistrationCode + ", fullBankName=" + fullBankName + ", shortBankName=" + shortBankName
+				+ ", bankLicenseNumber=" + bankLicenseNumber + ", bankLicenseDate=" + bankLicenseDate + "]";
+	}
 }
